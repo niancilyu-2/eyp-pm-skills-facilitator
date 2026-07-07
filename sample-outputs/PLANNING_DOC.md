@@ -6,7 +6,7 @@
 One program, three layers: **assignment and trust first** (a real segment engine, hardened ingress,
 default-deny serving), then the **campaign studio** (create → preview → results → promote/stop) as
 a workspace on the core's dormant segment seam. Buffered estimate **P50 ≈ 91 pd / P90 ≈ 107 pd**
-(~3.3–3.8 sprints): fits the 8-week freeze at P50 with mitigations; P90 consumes essentially the
+(~3.4–4.0 sprints): fits the 8-week freeze at P50 with mitigations; P90 consumes essentially the
 whole runway. Budget envelope (top-down burn) **$150k–$180k**; task-cost floor $82k–$96k. Biggest
 risks: serving-policy breadth, the unverified analytics surface, and a seam that core has
 already marked obsolete.
@@ -75,6 +75,10 @@ also in SPEC.md, makes core-team coordination a formal dependency).
 | Seam activation (M1) | none visible — enabling layer | real ISegmentService provider + campaign/variant model + migration |
 
 ## 7. Open questions
+- **The M3 gate decision rule:** if the trust fixes alone (M1–M3) retain the at-risk regulated
+  accounts, M4–M5 get re-scoped before build. Owner: PM + eng lead, at the M3 design review.
+- Preview-link token scoping (M3) — a shareable per-segment link must not become the header
+  bypass M2 closes (see SPEC RAD).
 - Rule precedence for overlapping campaigns (blocks M1 design).
 - Winner-call rigor in v1 (product call; doesn't block).
 - v2: does the studio graduate to its own section? (revisit after adoption data).

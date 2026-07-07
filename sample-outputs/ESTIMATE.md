@@ -5,7 +5,7 @@ against Umbraco-CMS @ `ba6ec7ab`, using `workshop/team-capacity.md`.
 
 ## 1. Headline
 - **Effort:** buffered **P50 ≈ 91 pd / P90 ≈ 107 pd** (correlation-adjusted bound ≈ 111 — see §2).
-- **Calendar:** ~**3.3–3.8 sprints** → fits the 8-week freeze **at P50 only**, and only with the
+- **Calendar:** ~**3.4–4.0 sprints** → fits the 8-week freeze **at P50 only**, and only with the
   FE-pairing and design-lead-time mitigations in place; P90 consumes essentially the whole runway.
 - **Cost:** budget envelope **$150k–$180k** (top-down burn); task-cost floor $82k–$96k (bottom-up).
   The ~$60–85k gap is the design/QA/coordination the task list doesn't enumerate. **Confidence: Medium.**
@@ -24,8 +24,8 @@ buckets fail independently; since they share the team and the freeze, the correl
 reported alongside it.
 
 ## 3. Capacity & runway (from team-capacity.md — every constrained role)
-4 engineers × 7 effective pd/sprint = 28 pd/sprint, −3.5 pd PTO. P50 91 pd ≈ 3.3 sprints; P90
-107 pd ≈ 3.8 sprints against a 4-sprint freeze.
+4 engineers × 7 effective pd/sprint = 28 pd/sprint; the 4-sprint freeze holds 4 × 28 − 3.5 pd
+PTO ≈ 108.5 pd. P50 91 pd ≈ 3.4 sprints; P90 107 pd ≈ 4.0 — the whole freeze.
 **Critical-path warnings:**
 - Studio UI (~24 pd) flows through the **single frontend engineer** ≈ 3.4 sprints solo — pairing
   the full-stack engineer on UI from sprint 1 is required — and that engineer is also on the
@@ -56,8 +56,9 @@ cluster it addresses.)*
   core-team conversation are cheap insurance and all precede sprint 1.
 
 ## 6. Why these numbers
-Measured the affected subsystems in the actual repo (Core ≈ 48.7k LOC cs; backoffice client ≈
-39.6k LOC — commands in SPEC.md), confirmed the seam exists and what does NOT exist (assignment
+Measured the affected subsystems in the actual repo (Core ≈ 213k LOC cs; backoffice client ≈
+441k LOC — commands in SPEC.md; an earlier undercount from a batching bug was corrected in
+review, and the sizing anchor is the webhook analog below, which was unaffected), confirmed the seam exists and what does NOT exist (assignment
 engine, publish-path segment handling — the verified absences drove milestone 2 into scope),
 decomposed into seven demoable milestones with cross-cutting work priced, and estimated at bucket
 level with three-point PERT challenged from both perspectives. The widest uncertainty sits exactly
@@ -72,7 +73,7 @@ where knowledge is thinnest: serving-policy breadth and the analytics surface.
 - Measured paths: `src/Umbraco.Core/**` (cs), `src/Umbraco.Web.UI.Client/**` (ts/js/html) —
   git-fallback method; generated/vendored excluded; commands + outputs in SPEC.md.
 - **Analog:** the webhook vertical slice.
-  `git ls-files 'src/Umbraco.Core/Webhooks/**' | grep '\.cs$' | xargs wc -l | tail -1` → `9142 total`
+  `git ls-files 'src/Umbraco.Core/Webhooks/**' | grep '\.cs$' | xargs cat | wc -l` → `9142`
   (inflated by ~200 small event classes — noted, not used as-is);
   `…/Controllers/Webhook/**` → `583 total`; `…/packages/webhook/**` (ts/html) → `2466 total`; 291 files.
 - **Multiplier:** studio UI ≈ webhook client package (2,466 LOC of CRUD screens) × 1.5–2 for a
