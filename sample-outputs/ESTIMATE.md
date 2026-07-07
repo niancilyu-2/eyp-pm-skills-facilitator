@@ -7,8 +7,8 @@ against Umbraco-CMS @ `ba6ec7ab`, using `workshop/team-capacity.md`.
 - **Effort:** buffered **P50 ≈ 91 pd / P90 ≈ 107 pd** (correlation-adjusted bound ≈ 111 — see §2).
 - **Calendar:** ~**3.4–4.0 sprints** → fits the 8-week freeze **at P50 only**, and only with the
   FE-pairing and design-lead-time mitigations in place; P90 consumes essentially the whole runway.
-- **Cost:** budget envelope **$150k–$180k** (top-down burn); task-cost floor $82k–$96k (bottom-up).
-  The ~$60–85k gap is the design/QA/coordination the task list doesn't enumerate. **Confidence: Medium.**
+- **Cost:** budget envelope **$240k–$280k** (top-down burn); task-cost floor $127k–$150k (bottom-up).
+  The ~$110k–$130k gap is the design/QA/coordination the task list doesn't enumerate. **Confidence: Medium.**
 
 ## 2. Effort by bucket (PERT — one three-point per bucket, stated per the granularity rule)
 | Bucket | O | M | P | P50 | P90 |
@@ -38,13 +38,13 @@ PTO ≈ 108.5 pd. P50 91 pd ≈ 3.4 sprints; P90 107 pd ≈ 4.0 — the whole fr
 ## 4. Dollar cost — bottom-up vs. top-down, reconciled
 | Method | Approach | Result | What it prices |
 |--------|----------|--------|----------------|
-| A — bottom-up | 91–107 pd × $900/day blended [Assumption: loaded rate] | **$82k–$96k** | the tasks enumerated |
-| B — top-down | 5.0 FTE (4 eng + 0.5 design + 0.5 QA) × 10 d/sprint × $900 = $45k/sprint × 3.4–4.0 sprints | **$153k–$180k** | the team the window occupies |
+| A — bottom-up | 91–107 pd × $1,400/day blended (team-capacity.md: US team, loaded) | **$127k–$150k** | the tasks enumerated |
+| B — top-down | 5.0 FTE (4 eng + 0.5 design + 0.5 QA) × 10 d/sprint × $1,400 = $70k/sprint × 3.4–4.0 sprints | **$238k–$280k** | the team the window occupies |
 
-**Reconciliation:** B − A ≈ $60k–$85k = the designer and QA the task list doesn't itemize,
-coordination with the core team, and <100% utilization. **Budget envelope: $150k–$180k. Task-cost
-floor: $82k–$96k.** *(Value context, not a cost check: the envelope is ~8% of the $2.12M at-risk
-cluster it addresses.)*
+**Reconciliation:** B − A ≈ $110k–$130k = the designer and QA the task list doesn't itemize,
+coordination with the core team, and <100% utilization. **Budget envelope: $240k–$280k. Task-cost
+floor: $127k–$150k.** *(Value context, not a cost check: the envelope is ~11–13% of the $2.12M
+at-risk cluster it addresses.)*
 
 ## 5. Two-perspective debate
 - **AI-accelerationist:** the seam exists with a tiny reference surface (5 files); the webhook

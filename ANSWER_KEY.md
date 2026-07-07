@@ -38,5 +38,5 @@ Fictional collaboration/docs app. Seeded gap: native time-tracking + capacity pl
 ## WF3 reference figures
 
 From `sample-outputs/ESTIMATE.md` and `SPEC.md` (full evidence trail in the files, pinned to
-Umbraco-CMS `ba6ec7ab`): P50 ≈ 91 pd / P90 ≈ 107 pd; budget envelope $150k–$180k, task-cost
-floor $82k–$96k.
+Umbraco-CMS `ba6ec7ab`): P50 ≈ 91 pd / P90 ≈ 107 pd; budget envelope $240k–$280k, task-cost
+floor $127k–$150k (US team, $1,400/day loaded per team-capacity.md).

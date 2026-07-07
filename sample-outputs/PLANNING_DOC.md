@@ -7,7 +7,7 @@ One program, three layers: **assignment and trust first** (a real segment engine
 default-deny serving), then the **campaign studio** (create → preview → results → promote/stop) as
 a workspace on the core's dormant segment seam. Buffered estimate **P50 ≈ 91 pd / P90 ≈ 107 pd**
 (~3.4–4.0 sprints): fits the 8-week freeze at P50 with mitigations; P90 consumes essentially the
-whole runway. Budget envelope (top-down burn) **$150k–$180k**; task-cost floor $82k–$96k. Biggest
+whole runway. Budget envelope (top-down burn) **$240k–$280k**; task-cost floor $127k–$150k. Biggest
 risks: serving-policy breadth, the unverified analytics surface, and a seam that core has
 already marked obsolete.
 
