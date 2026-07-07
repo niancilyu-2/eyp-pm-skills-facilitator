@@ -1,0 +1,329 @@
+<!doctype html>
+<!--
+  REAL pm-prototype OUTPUT — Personalization Campaign Studio (workshop default direction).
+  Generated from templates/prototype-template.html by an actual WF2 run (2026-07-06).
+  All product data is SAMPLE/FICTIONAL — see the hypothesis panel.
+  Open by double-clicking, or: python3 -m http.server
+  NETWORK NOTE: full styling needs internet once (Tailwind CDN). Offline, the inline fallback CSS
+  keeps the page legible but plain — warn reviewers if demoing without network.
+  Design rules: see references/anti-slop.md (no purple gradients, real content, clear hierarchy).
+-->
+<html lang="en" data-theme="umbraco">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prototype — Personalization Campaign Studio (Umbraco concept)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Theme tokens */
+    :root[data-theme="slate"]  { --accent:#0f766e; --accent-ink:#ffffff; --bg:#f8fafc; --surface:#ffffff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0; }
+    :root[data-theme="dusk"]   { --accent:#b45309; --accent-ink:#ffffff; --bg:#1c1917; --surface:#292524; --ink:#f5f5f4; --muted:#a8a29e; --line:#44403c; }
+    /* HOST-PRODUCT THEME — tokens extracted from Umbraco's design system (@umbraco-ui/uui-css) */
+    :root[data-theme="umbraco"] { --accent:#3544b1; --accent-ink:#ffffff; --bg:#f3f3f5; --surface:#ffffff; --ink:#060606; --muted:#5f5e63; --line:#d8d7d9;
+      --topbar:#1b264f; --topbar-ink:rgba(255,255,255,.9); --focus:#3879ff; --radius:3px;
+      --font:'Lato','Helvetica Neue',Helvetica,Arial,sans-serif; }
+    [data-theme="umbraco"] .rounded-xl, [data-theme="umbraco"] .rounded-lg { border-radius: var(--radius); }
+    body { background:var(--bg); color:var(--ink); font-family: var(--font, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial); }
+    .topbar { background:var(--topbar, var(--accent)); color:var(--topbar-ink, var(--accent-ink)); padding:.5rem 1rem; font-weight:700; font-size:.95rem; display:flex; align-items:center; gap:.5rem; }
+    .topbar .crumb { opacity:.7; font-weight:400; }
+    .surface { background:var(--surface); border-color:var(--line); }
+    .muted { color:var(--muted); }
+    .accent-bg { background:var(--accent); color:var(--accent-ink); }
+    .accent-text { color:var(--accent); }
+    .accent-ring:focus { outline:2px solid var(--focus, var(--accent)); outline-offset:2px; }
+    .nav-item[aria-current="true"] { background:color-mix(in srgb, var(--accent) 14%, transparent); color:var(--accent); font-weight:600; }
+    /* feedback overlay */
+    .fb-pin { position:absolute; width:22px; height:22px; border-radius:9999px; background:var(--accent); color:#fff; font-size:12px; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 1px 4px rgba(0,0,0,.3); z-index:50; }
+    body.fb-active * { cursor: crosshair !important; }
+    body.fb-active .no-fb, body.fb-active .no-fb * { cursor:auto !important; }
+    /* Screen routing must win over any utility display class. */
+    [hidden] { display: none !important; }
+    /* OFFLINE FALLBACK — Tailwind loads from a CDN; without network the page must stay legible.
+       These semantic rules give a degraded-but-presentable layout when Tailwind is absent. */
+    body { margin:0; }
+    aside { min-width:14rem; border-right:1px solid var(--line); padding:.75rem; background:var(--surface); }
+    main { padding:1.5rem; max-width:64rem; flex:1; }
+    article, form, details { background:var(--surface); border:1px solid var(--line); border-radius:.75rem; padding:1rem; margin-bottom:.75rem; }
+    button, input, select { font:inherit; padding:.4rem .8rem; border:1px solid var(--line); border-radius:.5rem; background:transparent; color:inherit; }
+    nav a { display:block; padding:.5rem .75rem; color:inherit; text-decoration:none; }
+    #proto-controls { position:fixed; bottom:.75rem; left:50%; transform:translateX(-50%); background:var(--surface); border:1px solid var(--line); border-radius:9999px; padding:.35rem .5rem; display:flex; gap:.25rem; align-items:center; }
+    .layout-shell { display:flex; }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- ================================ PRODUCT TOP BAR ================================ -->
+  <div class="topbar no-fb"><span>Umbraco Backoffice</span><span class="crumb">/ Campaign Studio (concept — mock data)</span></div>
+
+  <!-- ============================ HYPOTHESIS + REAL/FAKED PANEL ============================ -->
+  <details class="no-fb surface border-b" open>
+    <summary class="cursor-pointer px-4 py-2 text-sm font-semibold flex items-center gap-2">
+      <span class="accent-text">●</span> About this prototype (hypothesis &amp; what's real)
+      <span class="muted font-normal">— click to collapse</span>
+    </summary>
+    <div class="px-4 pb-3 text-sm grid md:grid-cols-3 gap-4">
+      <div>
+        <div class="font-semibold mb-1">Hypothesis we're testing</div>
+        <p class="muted">"A marketer can go from test idea to a <b>trusted winner readout</b> without
+        leaving the CMS — and without a developer — which we'll know if test users complete
+        create → preview → promote unaided."</p>
+      </div>
+      <div>
+        <div class="font-semibold mb-1">✅ Real in this prototype</div>
+        <ul class="muted list-disc pl-4"><li>the create → preview → results click-through</li><li>screen layout, nav, status chips, empty/loading/error states</li></ul>
+      </div>
+      <div>
+        <div class="font-semibold mb-1">🟡 Faked / illustrative</div>
+        <ul class="muted list-disc pl-4"><li>segments, traffic, lift %, confidence — all sample numbers</li><li>no backend; nothing persists; audit line is static</li><li>open question: rule precedence when campaigns overlap</li></ul>
+      </div>
+    </div>
+  </details>
+
+  <div class="layout-shell flex min-h-[calc(100vh-2.5rem)]">
+    <aside class="no-fb w-56 shrink-0 surface border-r p-3 hidden sm:block">
+      <div class="px-2 py-2 font-bold text-lg">Campaign Studio</div>
+      <nav class="mt-2 space-y-1 text-sm">
+        <a href="#" class="nav-item block px-3 py-2 rounded-lg" data-nav-target="list" aria-current="true">Campaigns</a>
+        <a href="#" class="nav-item block px-3 py-2 rounded-lg" data-nav-target="create">Create campaign</a>
+        <a href="#" class="nav-item block px-3 py-2 rounded-lg" data-nav-target="preview">Segment preview</a>
+        <a href="#" class="nav-item block px-3 py-2 rounded-lg" data-nav-target="results">Results</a>
+      </nav>
+    </aside>
+
+    <main class="flex-1 p-6 max-w-5xl">
+
+      <!-- SCREEN: campaigns list -->
+      <section data-screen="list">
+        <header class="flex items-center justify-between mb-4">
+          <h1 class="text-2xl font-bold">Campaigns</h1>
+          <button class="accent-bg px-4 py-2 rounded-lg text-sm font-medium accent-ring" data-goto="create">+ New campaign</button>
+        </header>
+        <div class="grid gap-3">
+          <article class="surface border rounded-xl p-4 flex items-center justify-between">
+            <div><div class="font-medium">Gold-tier hero test</div><div class="muted text-sm">Audience: loyalty Gold+ · Home hero · <span class="accent-text font-medium">Live</span> · Variant B leading +12% (sample)</div></div>
+            <span class="flex gap-2"><button class="text-sm accent-text accent-ring" data-goto="results">Results</button><button class="text-sm accent-text accent-ring" data-goto="preview">Preview</button></span>
+          </article>
+          <article class="surface border rounded-xl p-4 flex items-center justify-between">
+            <div><div class="font-medium">EU compliance banner rollout</div><div class="muted text-sm">Audience: region EU · All landing pages · <span class="muted">Draft</span></div></div>
+            <button class="text-sm accent-text accent-ring" data-goto="create">Edit</button>
+          </article>
+          <article class="surface border rounded-xl p-4 flex items-center justify-between">
+            <div><div class="font-medium">Winback offer test</div><div class="muted text-sm">Audience: lapsed 90d · Pricing page · <span class="font-medium">Stopped 🔒</span> — locked by compliance; cannot republish without approval</div></div>
+            <button class="text-sm accent-text accent-ring" data-goto="results">History</button>
+          </article>
+          <div class="muted text-sm px-1">Archived (0) — <em>campaigns you retire will appear here</em></div>
+        </div>
+      </section>
+
+      <!-- SCREEN: create campaign -->
+      <section data-screen="create" hidden>
+        <header class="flex items-center gap-3 mb-4">
+          <button class="muted text-sm accent-ring" data-goto="list">← Back</button>
+          <h1 class="text-2xl font-bold">Create campaign</h1>
+        </header>
+        <form class="surface border rounded-xl p-5 max-w-xl space-y-4" onsubmit="return PROTO.submit(event)">
+          <label class="block"><span class="text-sm font-medium">Campaign name</span>
+            <input required class="mt-1 w-full border rounded-lg px-3 py-2 bg-transparent accent-ring" placeholder="e.g. Gold-tier hero test" /></label>
+          <label class="block"><span class="text-sm font-medium">Audience segment</span>
+            <select class="mt-1 w-full border rounded-lg px-3 py-2 bg-transparent accent-ring"><option>Loyalty: Gold+</option><option>Region: EU</option><option>First-time visitors</option><option>Lapsed 90 days</option></select></label>
+          <label class="block"><span class="text-sm font-medium">Variant A (control)</span>
+            <select class="mt-1 w-full border rounded-lg px-3 py-2 bg-transparent accent-ring"><option>Current homepage hero</option><option>Current pricing banner</option></select></label>
+          <label class="block"><span class="text-sm font-medium">Variant B (challenger)</span>
+            <select class="mt-1 w-full border rounded-lg px-3 py-2 bg-transparent accent-ring"><option>Premium hero (members)</option><option>Localised compliance banner</option></select></label>
+          <label class="block"><span class="text-sm font-medium">Goal metric</span>
+            <select class="mt-1 w-full border rounded-lg px-3 py-2 bg-transparent accent-ring"><option>Click-through on hero CTA</option><option>Signup conversion</option></select></label>
+          <div class="flex gap-2">
+            <button type="submit" class="accent-bg px-4 py-2 rounded-lg text-sm font-medium accent-ring">Launch test</button>
+            <button type="button" class="px-4 py-2 rounded-lg text-sm border accent-ring" data-goto="preview">Preview first</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- SCREEN: per-segment preview (the trust moment) -->
+      <section data-screen="preview" hidden>
+        <header class="flex items-center gap-3 mb-4">
+          <button class="muted text-sm accent-ring" data-goto="list">← Back</button>
+          <h1 class="text-2xl font-bold">Segment preview</h1>
+        </header>
+        <div class="flex gap-2 mb-4">
+          <button id="pv-chip-gold" class="accent-bg px-3 py-1.5 rounded-full text-sm accent-ring" onclick="PROTO.previewAs('gold')">Gold-tier</button>
+          <button id="pv-chip-eu" class="px-3 py-1.5 rounded-full text-sm border accent-ring" onclick="PROTO.previewAs('eu')">EU visitor</button>
+          <button id="pv-chip-first" class="px-3 py-1.5 rounded-full text-sm border accent-ring" onclick="PROTO.previewAs('first')">First-time</button>
+        </div>
+        <article class="surface border rounded-xl p-6 mb-3">
+          <div class="muted text-xs uppercase tracking-wide mb-2" id="pv-label">Home hero — as seen by Gold-tier (Variant B)</div>
+          <div class="text-xl font-bold mb-1" id="pv-title">Welcome back — your member pricing is live</div>
+          <p class="muted text-sm mb-3" id="pv-copy">Sample hero copy for the premium variant. What you see here is exactly what this segment gets.</p>
+          <button class="accent-bg px-4 py-2 rounded-lg text-sm accent-ring" id="pv-cta" onclick="PROTO.toast('CTA click recorded (demo)')">See member offers</button>
+        </article>
+        <div class="surface border rounded-xl p-4 flex items-center justify-between">
+          <div class="muted text-sm">Preview failed to load for segment "Lapsed 90d"?</div>
+          <button class="accent-text text-sm accent-ring" onclick="PROTO.toast('Retrying preview… (demo)')">Retry</button>
+        </div>
+        <p class="muted text-sm mt-3">Shareable link: <span class="accent-text">…/preview?campaign=gold-hero&amp;segment=gold</span> <button class="accent-ring" onclick="PROTO.toast('Link copied (demo)')">Copy</button></p>
+      </section>
+
+      <!-- SCREEN: results -->
+      <section data-screen="results" hidden>
+        <header class="flex items-center gap-3 mb-4">
+          <button class="muted text-sm accent-ring" data-goto="list">← Back</button>
+          <h1 class="text-2xl font-bold">Results — Gold-tier hero test</h1>
+          <button class="ml-auto text-sm accent-text accent-ring" onclick="PROTO.fakeLoad(this)">Simulate refresh</button>
+        </header>
+        <div class="mt-4 space-y-2 animate-pulse" hidden><div class="h-3 rounded bg-black/10"></div><div class="h-3 rounded bg-black/10 w-2/3"></div></div>
+        <div class="grid md:grid-cols-2 gap-4 mb-4">
+          <article class="surface border rounded-xl p-5">
+            <div class="text-sm font-semibold mb-1">Variant A — control<span id="va-status" class="muted"></span></div>
+            <div class="muted text-sm">18,204 visitors · 512 conversions · 2.8% CTR <em>(sample)</em></div>
+          </article>
+          <article class="surface border rounded-xl p-5" style="border-color:var(--accent)">
+            <div class="text-sm font-semibold mb-1">Variant B — challenger <span class="accent-text">leading</span></div>
+            <div class="muted text-sm">18,167 visitors · 573 conversions · 3.2% CTR · <b>+12% lift, 96% confidence</b> <em>(sample)</em></div>
+          </article>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="accent-bg px-4 py-2 rounded-lg text-sm font-medium accent-ring" onclick="PROTO.promoteWinner()">Promote winner</button>
+          <button class="px-4 py-2 rounded-lg text-sm border accent-ring" onclick="PROTO.stopVariant(this)">Stop losing variant</button>
+        </div>
+        <p id="promo-banner" class="accent-text text-sm mt-3" hidden></p>
+        <p class="muted text-xs mt-4" id="audit-line">Audit: 2026-07-06 14:02 — "Winback offer test" Variant A stopped by j.doe · locked 🔒 · full audit trail is out of scope for this prototype</p>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ================================ CONTROL BAR ================================ -->
+  <div id="proto-controls" class="no-fb fixed bottom-3 left-1/2 -translate-x-1/2 surface border rounded-full shadow-lg px-2 py-1.5 flex items-center gap-1 text-sm z-40">
+    <span class="sm:hidden flex items-center gap-1">
+      <button class="px-2 py-1 rounded-full accent-ring" data-goto="list">1</button>
+      <button class="px-2 py-1 rounded-full accent-ring" data-goto="create">2</button>
+      <button class="px-2 py-1 rounded-full accent-ring" data-goto="preview">3</button>
+      <button class="px-2 py-1 rounded-full accent-ring" data-goto="results">4</button>
+      <span class="w-px h-5 bg-[var(--line)]"></span>
+    </span>
+    <button class="px-3 py-1 rounded-full accent-ring" onclick="PROTO.theme()">🎨 Theme</button>
+    <span class="w-px h-5 bg-[var(--line)]"></span>
+    <button id="fb-toggle" class="px-3 py-1 rounded-full accent-ring" onclick="PROTO.toggleFeedback()">💬 Feedback</button>
+    <button class="px-3 py-1 rounded-full accent-ring" onclick="PROTO.exportFeedback()">⬇ Export</button>
+    <span class="w-px h-5 bg-[var(--line)]"></span>
+    <button class="px-3 py-1 rounded-full accent-ring" onclick="PROTO.reset()">↻ Reset</button>
+  </div>
+
+  <div id="toast" class="no-fb fixed bottom-16 left-1/2 -translate-x-1/2 accent-bg px-4 py-2 rounded-lg text-sm shadow-lg transition-opacity opacity-0 pointer-events-none z-50"></div>
+
+  <script>
+  // ============================ Prototype runtime (vanilla JS) ============================
+  const PROTO = (() => {
+    const feedback = [];   // {id, text, x, y, screen, selector}
+    let fbActive = false;
+    // Static for the page lifetime — query once instead of on every navigation.
+    // NOTE: screens are SECTIONS only; nav links use data-nav-target and must never match here.
+    const screens = document.querySelectorAll('section[data-screen]');
+    const navItems = document.querySelectorAll('.nav-item[data-nav-target]');
+    let currentScreen = 'list';
+
+    function show(screen) {
+      currentScreen = screen;
+      screens.forEach(s => s.hidden = (s.dataset.screen !== screen));
+      navItems.forEach(n => n.setAttribute('aria-current', String(n.dataset.navTarget === screen)));
+      // pins belong to the screen they were made on — only show the current screen's pins
+      document.querySelectorAll('.fb-pin').forEach(p => p.hidden = (p.dataset.screen !== screen));
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+    function theme() {
+      const order = ['umbraco','slate','dusk'];
+      const cur = document.documentElement.getAttribute('data-theme');
+      document.documentElement.setAttribute('data-theme', order[(order.indexOf(cur)+1)%order.length]);
+    }
+    function toast(msg) {
+      const t = document.getElementById('toast'); t.textContent = msg;
+      t.style.opacity = '1'; setTimeout(() => t.style.opacity = '0', 1600);
+    }
+    function submit(e){ e.preventDefault(); toast('Saved (demo — nothing persisted)'); show('list'); return false; }
+    function fakeLoad(btn){
+      // look up the skeleton within the whole section — never rely on direct parent coupling
+      const scope = btn.closest('section') || document;
+      const box = scope.querySelector('.animate-pulse');
+      if (!box) { toast('Loaded (demo)'); return; }
+      box.hidden = false;
+      btn.disabled = true; setTimeout(()=>{ box.hidden = true; btn.disabled = false; toast('Loaded (demo)'); }, 900);
+    }
+    // ---- real state changes (a control that only toasts is a dead control in disguise) ----
+    const PV = {
+      gold: {label:'Home hero — as seen by Gold-tier (Variant B)', title:'Welcome back — your member pricing is live', copy:'Sample hero copy for the premium variant. What you see here is exactly what this segment gets.', cta:'See member offers'},
+      eu: {label:'Home hero — as seen by EU visitors (compliance variant)', title:'Clear pricing, consent-first', copy:'Sample localised hero: consent-first messaging and regional pricing display for EU traffic.', cta:'Manage preferences'},
+      first: {label:'Home hero — as seen by first-time visitors (Variant A control)', title:'Build faster on an open CMS', copy:'Sample default hero: the standard first-visit experience, unchanged control.', cta:'Start exploring'}
+    };
+    function previewAs(k){
+      const d = PV[k]; if (!d) return;
+      [['pv-label','label'],['pv-title','title'],['pv-copy','copy'],['pv-cta','cta']].forEach(([id,key])=>{
+        const el = document.getElementById(id); if (el) el.textContent = d[key];
+      });
+      ['gold','eu','first'].forEach(s=>{
+        const c = document.getElementById('pv-chip-'+s); if (!c) return;
+        c.classList.toggle('accent-bg', s===k); c.classList.toggle('border', s!==k);
+      });
+      toast('Previewing as: ' + k + ' segment (demo)');
+    }
+    function stopVariant(btn){
+      const st = document.getElementById('va-status'); if (st) st.textContent = ' · Stopped 🔒 (locked)';
+      const a = document.getElementById('audit-line');
+      if (a) a.textContent += ' · just now — "Gold-tier hero test" Variant A stopped by you (demo) · locked 🔒';
+      if (btn){ btn.disabled = true; btn.textContent = 'Variant A stopped 🔒'; }
+      toast('Variant A stopped — republish is locked (demo)');
+    }
+    function promoteWinner(){
+      const b = document.getElementById('promo-banner');
+      if (b){ b.hidden = false; b.textContent = '✔ Variant B promoted to 100% of Gold-tier traffic (demo — nothing persisted)'; }
+      toast('Variant B promoted (demo)');
+    }
+    function reset(){ feedback.length = 0; document.querySelectorAll('.fb-pin').forEach(p=>p.remove()); show('list'); toast('Reset'); }
+
+    // ---- pin-to-element feedback ----
+    function toggleFeedback(){
+      fbActive = !fbActive;
+      document.body.classList.toggle('fb-active', fbActive);
+      document.getElementById('fb-toggle').classList.toggle('accent-bg', fbActive);
+      toast(fbActive ? 'Feedback on — click any element to comment' : 'Feedback off');
+    }
+    function cssPath(el){
+      if (!el || el===document.body) return 'body';
+      let path = el.tagName.toLowerCase();
+      if (el.className && typeof el.className==='string') path += '.' + el.className.trim().split(/\s+/).slice(0,2).join('.');
+      return path;
+    }
+    document.addEventListener('click', (e) => {
+      if (!fbActive) return;
+      if (e.target.closest('.no-fb')) return;
+      e.preventDefault(); e.stopPropagation();
+      const text = prompt('Your comment on this element:');
+      if (!text) return;
+      const id = feedback.length + 1;
+      const r = e.target.getBoundingClientRect();
+      feedback.push({ id, text, x: Math.round(r.left+window.scrollX), y: Math.round(r.top+window.scrollY),
+                      screen: currentScreen, selector: cssPath(e.target),
+                      nearText: (e.target.textContent || '').trim().slice(0, 60) });
+      const pin = document.createElement('div');
+      pin.className = 'fb-pin'; pin.textContent = id; pin.title = text; pin.dataset.screen = currentScreen;
+      pin.style.left = (r.left+window.scrollX-4)+'px'; pin.style.top = (r.top+window.scrollY-4)+'px';
+      document.body.appendChild(pin);
+      toast('Comment #' + id + ' pinned');
+    }, true);
+    function exportFeedback(){
+      if (!feedback.length){ toast('No feedback yet'); return; }
+      const blob = new Blob([JSON.stringify({ generatedAt:new Date().toISOString(), comments:feedback }, null, 2)], {type:'application/json'});
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'prototype-feedback.json'; a.click();
+      toast('Exported ' + feedback.length + ' comment(s)');
+    }
+
+    document.addEventListener('click', (e) => {
+      const nav = e.target.closest('.nav-item[data-nav-target]'); if (nav){ e.preventDefault(); show(nav.dataset.navTarget); }
+      const go = e.target.closest('[data-goto]'); if (go){ e.preventDefault(); show(go.dataset.goto); }
+    });
+
+    return { show, theme, toast, submit, fakeLoad, reset, toggleFeedback, exportFeedback, previewAs, stopVariant, promoteWinner };
+  })();
+  </script>
+</body>
+</html>
