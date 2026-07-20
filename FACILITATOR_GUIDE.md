@@ -36,8 +36,10 @@ for WF3.
 ## Workflow 1 — `pm-ideation`  (~15–20 min agent runtime)
 
 ```
-/pm-ideation workshop/mock-data
+/pm-ideation workshop/mock-data workshop/product-goals.md
 ```
+(The second path is optional context — the org's leading KPIs — so success criteria land in
+product language, not just dollars.)
 
 For a 2-hour session this is the stage to run as a facilitated demo (or hand cohorts
 `sample-outputs/roadmap-recommendation.md`) so participant hands-on time goes to WF2/WF3 —
@@ -76,6 +78,9 @@ comment and exporting the feedback JSON.
 Talking points:
 - "It made you choose a direction before building, and the banner lists what's simulated."
 - "Notice what it did not build: the audit console."
+- If asked "how do I get this to customers?": it's one self-contained HTML file — share a link
+  (SharePoint/Drive or a static host), never a zipped attachment; details in the skill's
+  zero-build reference.
 
 ## Workflow 3 — `pm-plan-and-estimate`  (~20–30 min)
 
@@ -90,6 +95,9 @@ ranges, a sprint/runway view from `team-capacity.md`, and a spec whose verified 
 re-executed at write time (including verified absences and a deprecation check).
 
 Talking points:
+- Frame the boundary up front: "parts of this sit in engineering's territory — the point is to
+  arrive with a grounded draft that saves them estimating from scratch, and everything is stamped
+  'needs engineering validation'. Calibrate to your org's PM/eng split."
 - "The estimate points at files that actually exist; open one live."
 - "Optimist vs. skeptic debate, ranges instead of one number, 'needs eng validation' on top."
 - "Nothing in the spec is trusted from memory — the commands were re-run when it was written."
